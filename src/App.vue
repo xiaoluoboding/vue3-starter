@@ -1,34 +1,76 @@
-<script setup lang="ts">
-import { RouterLink, RouterView } from 'vue-router'
-import HelloWorld from '@/components/HelloWorld.vue'
-</script>
-
 <template>
   <header>
-    <img alt="Vue logo" class="logo" src="@/assets/logo.svg" width="125" height="125" />
-
-    <div class="wrapper">
-      <HelloWorld msg="You did it!" />
-
-      <nav>
-        <RouterLink to="/">Home</RouterLink>
+    <img
+      alt="Vue logo"
+      class="block mx-auto mt-0 mb-8 lg:mr-8"
+      src="@/assets/logo.svg"
+      width="125"
+      height="125"
+    />
+    <div class="wrapper" lg="flex place-items-center flex-wrap">
+      <HelloWorld :msg="$t('hello', { name: 'A better Vue 3 Stater' })" />
+      <nav
+        class="w-full text-xs text-center mt-8"
+        lg="text-left text-base py-4 px-0 mt-4 -ml-4"
+      >
+        <RouterLink to="/">{{ $t('menu.home') }}</RouterLink>
         <RouterLink to="/about">About</RouterLink>
       </nav>
+      <div class="w-full text-center mt-8 space-x-4" lg="text-left">
+        <button
+          border="~ [var(--color-border)]"
+          class="p-2 rounded-md"
+          @click="(e) => toggleDark()"
+        >
+          <carbon:moon class="w-6 h-6" v-if="isDark" />
+          <carbon:sun class="w-6 h-6" v-else />
+        </button>
+        <button
+          border="~ [var(--color-border)]"
+          class="p-2 rounded-md"
+          @click="toggleLocales"
+        >
+          <carbon:language class="w-6 h-6" />
+        </button>
+        <button
+          border="~ [var(--color-border)]"
+          class="p-2 rounded-md"
+          @click="gotoGitHub"
+        >
+          <carbon:logo-github class="w-6 h-6" />
+        </button>
+      </div>
     </div>
   </header>
 
   <RouterView />
 </template>
 
+<script setup lang="ts">
+import { RouterLink, RouterView } from 'vue-router'
+import { useI18n } from 'vue-i18n'
+
+import HelloWorld from '@/components/HelloWorld.vue'
+import { isDark, toggleDark } from '@/composables/useDark'
+const { locale, availableLocales } = useI18n()
+
+const gotoGitHub = () => {
+  window.open('https://github.com/xiaoluoboding/vue3-starter', '_blank')
+}
+
+const toggleLocales = () => {
+  // change to some real logic
+  const locales = availableLocales
+  console.log(locale.value)
+  locale.value = locales[(locales.indexOf(locale.value) + 1) % locales.length]
+}
+</script>
+
 <style>
 @import '@/assets/base.css';
 
 #app {
-  max-width: 1280px;
-  margin: 0 auto;
-  padding: 2rem;
-
-  font-weight: normal;
+  @apply max-w-screen-xl mx-auto my-0 p-8 font-normal;
 }
 
 header {
@@ -36,15 +78,10 @@ header {
   max-height: 100vh;
 }
 
-.logo {
-  display: block;
-  margin: 0 auto 2rem;
-}
-
 a,
 .green {
   text-decoration: none;
-  color: hsla(160, 100%, 37%, 1);
+  color: hsla(160, 100%, 37%, 1) !important;
   transition: 0.4s;
 }
 
@@ -52,13 +89,6 @@ a,
   a:hover {
     background-color: hsla(160, 100%, 37%, 0.2);
   }
-}
-
-nav {
-  width: 100%;
-  font-size: 12px;
-  text-align: center;
-  margin-top: 2rem;
 }
 
 nav a.router-link-exact-active {
@@ -95,25 +125,6 @@ nav a:first-of-type {
     display: flex;
     place-items: center;
     padding-right: calc(var(--section-gap) / 2);
-  }
-
-  header .wrapper {
-    display: flex;
-    place-items: flex-start;
-    flex-wrap: wrap;
-  }
-
-  .logo {
-    margin: 0 2rem 0 0;
-  }
-
-  nav {
-    text-align: left;
-    margin-left: -1rem;
-    font-size: 1rem;
-
-    padding: 1rem 0;
-    margin-top: 1rem;
   }
 }
 </style>
