@@ -84,3 +84,5 @@ pnpm run lint
 ```
 
 ## License
+
+[MIT](./LICENSE) - [@xiaoluoboding](https://github.com/xiaoluoboding)

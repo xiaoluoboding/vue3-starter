@@ -8,7 +8,7 @@
       height="125"
     />
     <div class="wrapper" lg="flex place-items-center flex-wrap">
-      <HelloWorld :msg="$t('hello', { name: 'A better Vue 3 Stater' })" />
+      <HelloWorld :msg="$t('hello', { name: 'A better Vue 3 Starter' })" />
       <nav
         class="w-full text-xs text-center mt-8"
         lg="text-left text-base py-4 px-0 mt-4 -ml-4"
