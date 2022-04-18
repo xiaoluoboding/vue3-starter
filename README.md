@@ -83,6 +83,10 @@ pnpm run test:unit
 pnpm run lint
 ```
 
+## Related Template
+
+* [nuxt3-starter](https://github.com/xiaoluoboding/nuxt3-starter) - 💚 A Better Nuxt 3 Starter Template，generate by `nuxi`.
+
 ## License
 
 [MIT](./LICENSE) - [@xiaoluoboding](https://github.com/xiaoluoboding)
