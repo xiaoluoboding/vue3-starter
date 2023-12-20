@@ -19,7 +19,7 @@
       <div class="w-full text-center mt-8 space-x-4" lg="text-left">
         <button
           border="~ [var(--color-border)]"
-          class="p-2 rounded-md"
+          class="p-2 rounded-md bg-transparent"
           @click="(e) => toggleDark()"
         >
           <carbon:moon class="w-6 h-6" v-if="isDark" />
@@ -27,14 +27,14 @@
         </button>
         <button
           border="~ [var(--color-border)]"
-          class="p-2 rounded-md"
+          class="p-2 rounded-md bg-transparent"
           @click="toggleLocales"
         >
           <carbon:language class="w-6 h-6" />
         </button>
         <button
           border="~ [var(--color-border)]"
-          class="p-2 rounded-md"
+          class="p-2 rounded-md bg-transparent"
           @click="gotoGitHub"
         >
           <carbon:logo-github class="w-6 h-6" />
@@ -51,18 +51,22 @@ import { RouterLink, RouterView } from 'vue-router'
 import { useI18n } from 'vue-i18n'
 
 import HelloWorld from '@/components/HelloWorld.vue'
-import { isDark, toggleDark } from '@/composables/useDark'
-const { locale, availableLocales } = useI18n()
+import { isDark, toggleDark } from '@/composables/useDarkmode'
+import { availableLocales, loadLanguageAsync } from '@/plugins/i18n'
+
+const { locale } = useI18n()
 
 const gotoGitHub = () => {
   window.open('https://github.com/xiaoluoboding/vue3-starter', '_blank')
 }
 
-const toggleLocales = () => {
+async function toggleLocales() {
   // change to some real logic
   const locales = availableLocales
-  console.log(locale.value)
-  locale.value = locales[(locales.indexOf(locale.value) + 1) % locales.length]
+  const newLocale =
+    locales[(locales.indexOf(locale.value) + 1) % locales.length]
+  await loadLanguageAsync(newLocale)
+  locale.value = newLocale
 }
 </script>
 

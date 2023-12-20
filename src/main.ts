@@ -4,7 +4,8 @@ import App from './App.vue'
 import router from './router'
 import pinia from '@/plugins/pinia'
 import i18n from '@/plugins/i18n'
-import 'virtual:windi.css'
+import 'virtual:uno.css'
+import '@unocss/reset/tailwind-compat.css'
 
 const app = createApp(App)
 

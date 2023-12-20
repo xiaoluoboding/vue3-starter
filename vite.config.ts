@@ -2,8 +2,8 @@ import { fileURLToPath, URL } from 'url'
 import { resolve } from 'path'
 
 import { defineConfig } from 'vite'
-import vue from '@vitejs/plugin-vue'
-import WindiCSS from 'vite-plugin-windicss'
+import Vue from '@vitejs/plugin-vue'
+import UnoCSS from 'unocss/vite'
 import Icons from 'unplugin-icons/vite'
 import IconsResolver from 'unplugin-icons/resolver'
 import Components from 'unplugin-vue-components/vite'
@@ -14,7 +14,7 @@ const r = (...args: string[]) => resolve(__dirname, ...args)
 // https://vitejs.dev/config/
 export default defineConfig({
   plugins: [
-    vue(),
+    Vue(),
 
     // https://github.com/antfu/unplugin-vue-components
     Components({
@@ -30,8 +30,8 @@ export default defineConfig({
     // https://github.com/antfu/unplugin-icons
     Icons(),
 
-    // https://windicss.org/integrations/vite.html
-    WindiCSS(),
+    // https://unocss.dev/integrations/vite
+    UnoCSS(),
 
     // https://vue-i18n.intlify.dev/installation.html
     I18n({
